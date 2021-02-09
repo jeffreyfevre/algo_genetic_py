@@ -7,3 +7,6 @@
 Individu.py,f\0\f0f31f1566f1124c694b1c315821d01464933956
 =
 Population.py,b\f\bf417eaa96c62688572d0cec4c9b6cd2e5eec71d
+:
+
+.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302

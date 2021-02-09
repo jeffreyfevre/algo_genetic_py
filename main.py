@@ -2,8 +2,8 @@ from Simulation import Simulation
 
 
 def main():
-    phrase = "TD4 de Chris Domingues et Jeffrey Fevre."
-    Simulation(phrase, 100, 50, 50)
+    phrase = "TD de Jeffrey et Chris"
+    Simulation(phrase, 10000, 50, 70)
 
 
 if __name__ == '__main__':

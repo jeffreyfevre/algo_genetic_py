@@ -1,5 +1,6 @@
 import random
 
+
 class Individu:
     """Individu contenant une phrase et un fitness généré à partir de celle-ci"""
 
@@ -11,11 +12,10 @@ class Individu:
 
     # Methods
     def generate_phrase(self, taille_phrase):
-        gen_characters = 'abcdefghijklmnopqrsuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.0123456789 '
+        gen_characters = 'abcdefghijklmnopqrsuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ. '
         mot_genere = (''.join(random.choices(gen_characters, k=taille_phrase)))
         self.set_phrase(mot_genere)
         return self.get_phrase()
-
 
     def calcul_fitness(self, mot_a_trouver):
         i = 0
@@ -34,7 +34,7 @@ class Individu:
         self._phrase = phrase
 
     def get_fitness(self):
-        return self._phrase
+        return self._fitness
 
     def set_fitness(self, fitness):
         self._fitness = fitness

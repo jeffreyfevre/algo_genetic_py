@@ -1,3 +1,5 @@
+import math
+
 import Individu
 import random
 
@@ -24,18 +26,25 @@ class Population:
     def selection_pop(self, pourcentage_entre):
         # Fonction lambda qui trie les objets "Individu" par fitness en ordre décroissant
         self._individus.sort(key=lambda x: x._fitness, reverse=True)
+
         # Vérification valeurs de pourcentage_entre
-        if isinstance(int, pourcentage_entre) and 0 < pourcentage_entre < 100:
-            pourcentage_pop = (len(self._individus) // 100) * pourcentage_entre
+        if isinstance(pourcentage_entre, int) and 0 < pourcentage_entre < 100:
+
+            pourcentage_pop = math.floor((len(self._individus) * pourcentage_entre) / 100)
             self._selection_pop = self._individus[:pourcentage_pop]
+            for ind in self._selection_pop:
+                ind.get_phrase()
         else:
             print("La valeur de pourcentage n'est pas correcte.")
 
     def crossover_pop1(self):
         new_pop = []
+
         for _ in range(self._taille_pop):
             # Génération de deux parents choisis dans la population sélectionnée
             parent_1, parent_2 = random.sample(self._selection_pop, 2)
+            parent_1 = parent_1.get_phrase()
+            parent_2 = parent_2.get_phrase()
 
             # Aléatoire sur taille du parent moins 2
             gene_parent = random.randrange(1, len(parent_1) - 1)
@@ -50,13 +59,14 @@ class Population:
             new_pop.append(enfant_individu)
 
         self._individus = new_pop
-        return self._individus
 
     def crossover_pop2(self):
         mot_bebe = ""
         cross = []
         for _ in range(len(self._individus)):
             p1, p2 = random.sample(self._selection_pop, 2)
+            p1 = p1.get_phrase()
+            p2 = p2.get_phrase()
             for i in range(len(p1)):
                 if random.randrange(0, 2) == 1:
                     mot_bebe += p1[i]
@@ -68,13 +78,11 @@ class Population:
             cross.append(ind)
             mot_bebe = ""
         self._individus = cross
-        return self._individus
 
     def mutation_pop(self, pourcentage):
         population_mutante = []
         # String faisant office de liste de caractères
-        gen_characters = 'abcdefghijklmnopqrsuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.0123456789 '
-
+        gen_characters = 'abcdefghijklmnopqrsuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ. '
         # On parcourt la liste d'individus
         for individu in self._individus:
             nombre_aleatoire = random.randrange(0, pourcentage + 1)
@@ -82,7 +90,7 @@ class Population:
                 phrase_individu = individu.get_phrase()
 
                 # Index de la lettre à muter
-                index_mutant = random.randrange(len(individu.get_phrase()))
+                index_mutant = random.randrange(0,len(individu.get_phrase()))
 
                 # Transformation en liste
                 liste_phrase_individu = list(phrase_individu)
@@ -94,10 +102,9 @@ class Population:
                 # Changement de la phrase et nouveau calcul de l'individu
                 individu.set_phrase(mot_mutant)
                 individu.calcul_fitness(self._phrase)
-                population_mutante.append(individu)
+            population_mutante.append(individu)
 
         self._individus = population_mutante
-        return self.get_individus()
 
     # Accessors / Mutators
     def get_individus(self):
