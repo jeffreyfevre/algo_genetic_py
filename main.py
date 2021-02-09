@@ -1,11 +1,10 @@
-from Individu import *
+from Simulation import Simulation
+
 
 def main():
-    ind = Individu()
-    ind.generate_phrase(8)
-    print(ind.get_phrase())
+    phrase = "TD4 de Chris Domingues et Jeffrey Fevre."
+    Simulation(phrase, 100, 50, 50)
 
 
 if __name__ == '__main__':
     main()
-

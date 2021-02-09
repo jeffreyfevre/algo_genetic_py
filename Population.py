@@ -61,7 +61,7 @@ class Population:
                 if random.randrange(0, 2) == 1:
                     mot_bebe += p1[i]
                 else:
-                    mot_bebe  += p2[i]
+                    mot_bebe += p2[i]
             ind = Individu.Individu()
             ind.set_phrase(mot_bebe)
             ind.calcul_fitness(self._phrase)
@@ -74,30 +74,30 @@ class Population:
         population_mutante = []
         # String faisant office de liste de caractères
         gen_characters = 'abcdefghijklmnopqrsuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.0123456789 '
-        
+
         # On parcourt la liste d'individus
         for individu in self._individus:
-            mot_mutant = ""
-            phrase_individu = individu.get_phrase()
+            nombre_aleatoire = random.randrange(0, pourcentage + 1)
+            if pourcentage < nombre_aleatoire:
+                phrase_individu = individu.get_phrase()
 
-            # Index de la lettre à muter
-            index_mutant = random.randrange(len(individu.get_phrase()))
+                # Index de la lettre à muter
+                index_mutant = random.randrange(len(individu.get_phrase()))
 
-            # Transformation en liste
-            liste_phrase_individu = list(phrase_individu)
+                # Transformation en liste
+                liste_phrase_individu = list(phrase_individu)
 
-            # Modification du caractère à l'index choisi précédemment
-            liste_phrase_individu[index_mutant] = random.choice(gen_characters)
-            mot_mutant = ''.join(liste_phrase_individu)
+                # Modification du caractère à l'index choisi précédemment
+                liste_phrase_individu[index_mutant] = random.choice(gen_characters)
+                mot_mutant = ''.join(liste_phrase_individu)
 
-            # Changement de la phrase et nouveau calcul de l'individu
-            individu.set_phrase(mot_mutant)
-            individu.calcul_fitness(self._phrase)
-            population_mutante.append(individu)
+                # Changement de la phrase et nouveau calcul de l'individu
+                individu.set_phrase(mot_mutant)
+                individu.calcul_fitness(self._phrase)
+                population_mutante.append(individu)
 
         self._individus = population_mutante
         return self.get_individus()
-
 
     # Accessors / Mutators
     def get_individus(self):
