@@ -82,9 +82,15 @@ class Population:
 
             # Index de la lettre à muter
             index_mutant = random.randrange(len(individu.get_phrase()))
+
+            # Transformation en liste
             liste_phrase_individu = list(phrase_individu)
+
+            # Modification du caractère à l'index choisi précédemment
             liste_phrase_individu[index_mutant] = random.choice(gen_characters)
             mot_mutant = ''.join(liste_phrase_individu)
+
+            # Changement de la phrase et nouveau calcul de l'individu
             individu.set_phrase(mot_mutant)
             individu.calcul_fitness(self._phrase)
             population_mutante.append(individu)
@@ -99,6 +105,9 @@ class Population:
 
     def set_individus(self, liste_individus):
         self._individus = liste_individus
+
+    def get_selection(self):
+        return self._selection_pop
 
     def get_taille_pop(self):
         return self._taille_pop
