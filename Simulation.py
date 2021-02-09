@@ -1,0 +1,5 @@
+population(500)
+selection(20)
+crossover1()
+crossover2()
+mutation(52)
